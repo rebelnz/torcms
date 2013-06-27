@@ -1,0 +1,11 @@
+{% extends "admin_base.html" %}
+{% block body %}
+
+<h1>Admin Home</h1>
+<ul>
+  <li>chat?</li>
+  <li>quick analytics/server data</li>
+  </ul>
+
+{% end %}
+

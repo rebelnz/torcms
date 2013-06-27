@@ -1,0 +1,43 @@
+from wtforms import *
+from wtforms.validators import *
+from wtforms.widgets import *
+from datetime import date
+
+
+class RegistrationForm(Form):
+    username = TextField('Username', [
+        Length(min=4, max=25)
+    ])
+    email = TextField('Email Address', [
+        Length(min=6),
+        Email(message='Email address invalid.')
+    ])
+
+# class InvoiceForm(Form):
+#     idate   = DateTimeField('Invoice Date*', format='%d/%m/%Y')
+#     inumber = IntegerField('Invoice Number*',[
+#         Required()
+#     ])
+#     jnumber = IntegerField('Job Number')
+#     jdesc   = TextAreaField('Job Description')
+#     jclient = TextField('Client - Company')
+#     email   = TextField('Client Email', [
+#         Length(min=6),
+#         Email(message='Email address invalid.')
+#     ])
+#     amount = IntegerField('Amount')
+#     tax    = IntegerField('Tax')
+#     total  = IntegerField('Total')
+#     send   = BooleanField('Send')
+
+    # amount
+    # tax
+    # total
+    # company
+    # email
+    # send
+
+    # email = TextField('Email Address', [
+    #     validators.Length(min=6),
+    #     validators.Email(message='Email address invalid.')
+    # ])

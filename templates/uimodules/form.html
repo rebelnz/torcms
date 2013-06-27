@@ -1,0 +1,14 @@
+{% raw xsrf_form_html() %}
+  {% for field in form %}
+<div>
+  {% if field.errors %}
+<ul class="errors">
+  {% for error in field.errors %}
+  <li>{{ error }}</li>
+  {% end %}
+</ul>
+  {% end %}
+  {% raw field.label() %}
+  {% raw field() %}
+</div>
+{% end %}

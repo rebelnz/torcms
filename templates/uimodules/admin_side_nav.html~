@@ -1,0 +1,30 @@
+<ul class="nav nav-tabs nav-stacked">
+  <li class="dropdown">
+    <a class="dropdown-toggle" id="pages-dropdown" role="button" data-toggle="dropdown" href="#">Pages <b class="caret"></b></a>
+    <ul id="menu1" class="dropdown-menu" role="menu" aria-labelledby="pages-dropdown">
+      <li ><a role="menuitem" tabindex="-1" href="admin/pages/all">All Pages</a></li>
+      <li><a role="menuitem" tabindex="-1" href="admin/pages/add">Add Page</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" id="images-dropdown" role="button" data-toggle="dropdown" href="#">Images <b class="caret"></b></a>
+    <ul id="menu2" class="dropdown-menu" role="menu" aria-labelledby="images-dropdown">
+      <li><a role="menuitem" tabindex="-1" href="admin/images/all">All Images</a></li>
+      <li><a role="menuitem" tabindex="-1" href="admin/images/add">Add Image</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" id="files-dropdown" role="button" data-toggle="dropdown" href="#">Files <b class="caret"></b></a>
+    <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="files-dropdown">
+      <li><a role="menuitem" tabindex="-1" href="admin/files/all">All Files</a></li>
+      <li><a role="menuitem" tabindex="-1" href="admin/files/add">Add File</a></li>
+    </ul>
+  </li>
+  <li class="dropdown">
+    <a class="dropdown-toggle" id="forms-dropdown" role="button" data-toggle="dropdown" href="#">Forms <b class="caret"></b></a>
+    <ul id="menu3" class="dropdown-menu" role="menu" aria-labelledby="forms-dropdown">
+      <li><a role="menuitem" tabindex="-1" href="#">All Forms</a></li>
+      <li><a role="menuitem" tabindex="-1" href="#">Add Form</a></li>
+    </ul>
+  </li>
+</ul> <!-- /tabs -->
