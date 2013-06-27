@@ -38,12 +38,6 @@ class AdminTopNavModule(tornado.web.UIModule):
 
 class AdminSettingsNavModule(tornado.web.UIModule):
     def render(self):
-        nav_items = (("/admin","Admin","icon-lock"),
-                         ("/admin/settings","Settings","icon-cog"),
-                         ("/admin/users","Users","icon-user"),
-                         ("/admin/messages","Messages","icon-inbox"),
-                         ("/","View Site","icon-eye-open"))
-
         return self.render_string('uimodules/admin_settings_nav.html')
 
     def embedded_javascript(self):
