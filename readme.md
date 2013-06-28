@@ -1,7 +1,9 @@
 # CMS Built on tornado, mongdb
 
-### Seriously "in progress" -- clone at your own risk!
+Seriously "in progress"
 
 tornado
 mongodb
 bootstrap
+
+also requires wtforms, pymongo
