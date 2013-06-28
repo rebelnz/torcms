@@ -3,7 +3,26 @@
 
 <h4>Admin Settings</h4>
 
-	{% module AdminSettingsNavModule() %}
+{% module AdminSettingsNavModule() %}
+
+{# js control for lower sections from settings nav module #}
+
+<div class="tab-content">
+  
+  {% module AdminSettingsSiteModule() %}
+
+  {% module AdminSettingsContactModule() %}
+
+  {% module AdminSettingsAnalyticsModule() %}
+
+  {% module AdminSettingsDataModule() %}
+
+  {% module AdminSettingsCampaignModule() %}
+
+  {% module AdminSettingsCalendarModule() %}
+
+  {% module AdminSettingsMapModule() %}
+
 
 {% end %}
 

@@ -44,6 +44,36 @@ class AdminSettingsNavModule(tornado.web.UIModule):
         return "$(function () {$('#myTab a:last').tab('show'); })"
 
 
+class AdminSettingsSiteModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string('uimodules/admin_settings_site.html')
+
+
+class AdminSettingsContactModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string('uimodules/admin_settings_contact.html')
+
+class AdminSettingsCalendarModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string('uimodules/admin_settings_calendar.html')
+
+class AdminSettingsCampaignModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string('uimodules/admin_settings_campaign.html')
+
+class AdminSettingsDataModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string('uimodules/admin_settings_data.html')
+
+class AdminSettingsAnalyticsModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string('uimodules/admin_settings_analytics.html')
+
+class AdminSettingsMapModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string('uimodules/admin_settings_data.html')
+
+
 
 
 

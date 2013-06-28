@@ -18,9 +18,9 @@ class BaseHandler(tornado.web.RequestHandler):
     #     if not user: return None
     #     return self.get_secure_cookie("user_id")
 
-    # def page_url(self): #to pass to css active nav
-    #     page_uri = self.request.uri
-    #     return page_uri
+    # def somemeth(self): #to pass to css active nav
+    #     somevar = self.request.uri
+    #     return somevar
 
 
 class IndexHandler(BaseHandler):
@@ -54,9 +54,11 @@ class AdminSettingsHandler(BaseHandler):
     def get(self):
         self.render('admin_settings.html')
 
+
 class AdminUsersHandler(BaseHandler):
     def get(self):
         self.render('admin_users.html')
+
 
 class AdminMessagesHandler(BaseHandler):
     def get(self):
