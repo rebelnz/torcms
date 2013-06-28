@@ -1,3 +1,7 @@
-** CMS Built on tornado, mongdb
+# CMS Built on tornado, mongdb
 
-Seriously "in progress" clone at your own risk!
+### Seriously "in progress" -- clone at your own risk!
+
+tornado
+mongodb
+bootstrap

@@ -1,9 +1,0 @@
-{% extends "admin_base.html" %}
-{% block body %}
-
-<h4>Admin Settings</h4>
-
-	{% module AdminSettingsNavModule() %}
-
-{% end %}
-
