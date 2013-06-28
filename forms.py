@@ -15,10 +15,10 @@ class BaseForm(Form):
     Form.__init__(self, formdata, obj=obj, prefix=prefix, **kwargs)
 
 
-    
 class LoginForm(BaseForm):
     email    = TextField('Email',[Required(),Email()])
     password =  PasswordField('Password',[Required()])
+
 
 
 # class InvoiceForm(Form):

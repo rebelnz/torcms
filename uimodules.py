@@ -28,7 +28,8 @@ class AdminTopNavModule(tornado.web.UIModule):
     def render(self):
         # to set active class + we can add new items to nav
         nav_items = (("/admin","Admin","icon-lock"),
-                         ("/admin/settings","Settings","icon-cog"),
+                         ("/admin/settings/settings-site",
+                         "Settings","icon-cog"), #need url for default
                          ("/admin/users","Users","icon-user"),
                          ("/admin/messages","Messages","icon-inbox"),
                          ("/","View Site","icon-eye-open"))
@@ -40,8 +41,8 @@ class AdminSettingsNavModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('uimodules/admin_settings_nav.html')
 
-    def embedded_javascript(self):
-        return "$(function () {$('#myTab a:last').tab('show'); })"
+    def javascript_files(self):
+        return "/static/js/admin-settings.js"
 
 
 class AdminSettingsSiteModule(tornado.web.UIModule):
@@ -72,6 +73,10 @@ class AdminSettingsAnalyticsModule(tornado.web.UIModule):
 class AdminSettingsMapModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('uimodules/admin_settings_data.html')
+
+class TestModule(tornado.web.UIModule):
+    def render(self):
+        return self.render_string('uimodules/testmodule.html')
 
 
 

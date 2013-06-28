@@ -51,8 +51,10 @@ class AdminHandler(BaseHandler):
 
 
 class AdminSettingsHandler(BaseHandler):
-    def get(self):
-        self.render('admin_settings.html')
+    def get(self,settingsModule=None):
+        
+        print(settingsModule);
+        self.render('admin_settings.html',sMod=settingsModule)
 
 
 class AdminUsersHandler(BaseHandler):
@@ -69,7 +71,7 @@ handlers = [
     (r"/", IndexHandler),
     (r"/login", LoginHandler),
     (r"/admin", AdminHandler),
-    (r"/admin/settings", AdminSettingsHandler),
+    (r"/admin/settings/([^/]+)",AdminSettingsHandler),
     (r"/admin/users", AdminUsersHandler),
     (r"/admin/messages", AdminMessagesHandler),
 ]
