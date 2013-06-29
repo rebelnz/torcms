@@ -1,15 +1,14 @@
 $(function() {
-	$('#myTab a:last').tab('show'); 
 	
-	$("#admin-settings-nav li a").click(function() {
+	// prevent page reload for admin-settings
+	// switched off for now as it does reload 
+	// page and run query against
 
-		$.get('/admin/settings/' + $(this).data('req'), function(data) {
-			console.log($(this).data('req'));
-		});
-
-
-		
-		
-	});
+	// $("#admin-settings-nav li a").click(function(e) {
+	// 	var url = $(this).attr('href');
+	// 	var segment = url.split("/");
+	// 	$("#admin-settings-content").load(url + ' #settings-' + segment[3]);
+	// 	e.preventDefault();
+	// });
 		
  });

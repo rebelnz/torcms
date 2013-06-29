@@ -1,0 +1,13 @@
+<form action="" method="post" enctype="multipart/form-data">
+{% raw xsrf_form_html() %}
+<div class="wrapper-block">
+  {{ form.sitename.label }}
+  {{ form.sitename() }}
+  {% if form.sitename.errors %}
+  {% for error in form.sitename.errors %}
+  <span class="errors">{{ error }}</span>
+  {% end %}
+  {% end %}
+</div>   
+<input type="submit" class="submit btn-form" value="Submit" id="listing-submit">
+</form>
