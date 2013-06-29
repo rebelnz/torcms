@@ -47,31 +47,31 @@ class AdminHandler(BaseHandler):
     def get(self):
         # pt = self.page_url()
         # pprint(dir(self))
-        self.render('admin_index.html')
+        self.render('admin/admin_index.html')
 
 
 class AdminSettingsHandler(BaseHandler):
     # form is being pulled in by sMod
     def get(self,settingsModule=None):
         print(settingsModule);
-        self.render('admin_settings.html',sMod=settingsModule)
+        self.render('admin/admin_settings.html',sMod=settingsModule)
 
 
     def post(self,settingsModule=None):
         val = self.get_argument('sitename')
         print(val);
-        self.render('admin_settings.html',sMod=settingsModule)
+        self.render('admin/admin_settings.html',sMod=settingsModule)
 
 
 
 class AdminUsersHandler(BaseHandler):
     def get(self):
-        self.render('admin_users.html')
+        self.render('admin/admin_users.html')
 
 
 class AdminMessagesHandler(BaseHandler):
     def get(self):
-        self.render('admin_messages.html')
+        self.render('admin/admin_messages.html')
 
 
 handlers = [
