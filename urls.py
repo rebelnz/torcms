@@ -3,7 +3,6 @@ import db
 import forms
 
 from util import MultiValueDict
-
 from pprint import pprint
 
 
@@ -52,15 +51,21 @@ class AdminHandler(BaseHandler):
 
 class AdminSettingsHandler(BaseHandler):
     # form is being pulled in by sMod
-    def get(self,settingsModule=None):
-        print(settingsModule);
-        self.render('admin/admin_settings.html',sMod=settingsModule)
+    def get(self,sModule=None):
+        self.render('admin/admin_settings.html',sMod=sModule)
 
+    def post(self, sModule=None):
+        # pprint(self.request.arguments)
+        if sModule == "site":
+            form = forms.AdminSettingsSiteForm(self)
+        if form.validate():
+            pprint(form.data)
+            db.add_site_data(form.data)
+        else:
+            pprint(form.errors)
+            print("invalid")
 
-    def post(self,settingsModule=None):
-        val = self.get_argument('sitename')
-        print(val);
-        self.render('admin/admin_settings.html',sMod=settingsModule)
+        self.render('admin/admin_settings.html',sMod=sModule)
 
 
 

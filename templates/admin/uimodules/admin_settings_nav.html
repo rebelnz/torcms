@@ -1,11 +1,10 @@
-{# currently using data-req for request to keep boostrap js intact #}
 <ul class="nav nav-tabs" id="admin-settings-nav">
-  <li><a href="/admin/settings/site">Site</a></li>
-  <li><a href="/admin/settings/contact">Contact</a></li>
-  <li><a href="/admin/settings/analytics">Analytics</a></li>
-  <li><a href="/admin/settings/data">Data</a></li>
-  <li><a href="/admin/settings/campaign">Campaign</a></li>
-  <li><a href="/admin/settings/calendar">Calendar</a></li>
-  <li><a href="/admin/settings/map">Map</a></li>
+  
+  {% for (url,txt) in items %}
+  <li {% if url == handler.request.uri %} class="active"{% end %}>
+	<a href="{{ url }}"> {{txt}}</a>
+  </li>
+  {% end %}
+  
 </ul>
 

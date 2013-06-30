@@ -6,15 +6,22 @@
 {% module AdminSettingsNavModule() %}
 
 
-<div id="admin-settings-content">
-
+<div id="admin-settings-content" class="row">
+  
   {# we want to load only what we need... #}
   {# theres a commented out js for load() but maybe overkill #}
+  {# forms are being added to module through uimodules... #}
   
   {% if sMod == "site" %}  
-  {% module AdminSettingsSiteModule() %}
-  {% end %}
-  
+  <div class="span4">
+	{% module AdminSettingsSiteFormModule() %}
+  </div>
+
+  <div class="span4">
+	{% module AdminSettingsSiteModule() %}
+  </div>
+  {% end %}  
+
   {% if sMod == "contact" %}  
   {% module AdminSettingsContactModule() %}
   {% end %}

@@ -11,16 +11,15 @@
         <p class="navbar-text pull-right">
           Logged in as <a href="#" class="navbar-link">Username</a>
         </p>
-
+		
         <ul class="nav">
-
 		{% for (url,txt,icon) in items %}
-          <li {% if url == handler.request.uri %} class="active"{% end %}>
+          <li {% if txt.lower() == handler.request.uri.split("/")[2] %} class="active"{% end %}>
 			<a href="{{ url }}">
 			  <i class="{{icon}}"></i> {{txt}}</a>
 		  </li>
 		{% end %}
-        </ul>
+		</ul>
 
       </div><!--/.nav-collapse -->
 

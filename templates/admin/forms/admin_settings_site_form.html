@@ -1,13 +1,58 @@
-<form action="" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data" class="form-horizontal">
 {% raw xsrf_form_html() %}
-<div class="wrapper-block">
-  {{ form.sitename.label }}
+
+<div class="control-group">
+  <label class="control-label" for="sitename">Site Name</label>
+  <div class="controls">
   {{ form.sitename() }}
-  {% if form.sitename.errors %}
-  {% for error in form.sitename.errors %}
-  <span class="errors">{{ error }}</span>
-  {% end %}
-  {% end %}
-</div>   
-<input type="submit" class="submit btn-form" value="Submit" id="listing-submit">
+	   {% if form.sitename.errors %}
+	   {% for error in form.sitename.errors %}
+	   <span class="errors">{{ error }}</span>
+	   {% end %}
+	   {% end %}
+</div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="contact">Contact</label>
+  <div class="controls">
+  {{ form.contact() }}
+	   {% if form.contact.errors %}
+	   {% for error in form.contact.errors %}
+	   <span class="errors">{{ error }}</span>
+	   {% end %}
+	   {% end %}
+</div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="tagline">Tagline</label>
+  <div class="controls">
+  {{ form.tagline() }}
+	   {% if form.tagline.errors %}
+	   {% for error in form.tagline.errors %}
+	   <span class="errors">{{ error }}</span>
+	   {% end %}
+	   {% end %}
+</div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="timezone">Timezone</label>
+  <div class="controls">
+  {{ form.timezone() }}
+	   {% if form.timezone.errors %}
+	   {% for error in form.timezone.errors %}
+	   <span class="errors">{{ error }}</span>
+	   {% end %}
+	   {% end %}
+
+</div>
+</div>
+
+<div class="form-actions">
+  <button type="submit" class="btn btn-primary">Save changes</button>
+  <button type="button" class="btn">Cancel</button>
+</div>
+
 </form>

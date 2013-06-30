@@ -2,7 +2,7 @@ from wtforms import *
 from wtforms.validators import *
 from wtforms.widgets import *
 from datetime import date
-
+import pytz
 
 from util import MultiValueDict
 
@@ -13,6 +13,7 @@ class BaseForm(Form):
       for name in handler.request.arguments.keys():
         formdata.setlist(name, handler.get_arguments(name))
     Form.__init__(self, formdata, obj=obj, prefix=prefix, **kwargs)
+
     
 class LoginForm(BaseForm):
     email    = TextField('Email',[Required(),Email()])
@@ -20,4 +21,10 @@ class LoginForm(BaseForm):
 
 
 class AdminSettingsSiteForm(BaseForm):
-  sitename   = TextField('Site Name*',[Required()])
+  sitename  = TextField(u'Site Name*',[Required()])
+  contact   = TextField(u'Contact*',[Required()])
+  tagline   = TextField(u'Tag Line')
+  timezone = SelectField('Timezone',
+        choices = [(tz, tz) for tz in pytz.common_timezones],
+        coerce=unicode, description="Timezone"
+    )

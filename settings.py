@@ -14,11 +14,11 @@ settings = dict(
     template_path = os.path.join(os.path.dirname(__file__),'templates'),
     static_path   = os.path.join(os.path.dirname(__file__),'static'),
     upload_path   = os.path.join(os.path.dirname(__file__),'static/upload'),
-    xsrf_cookies  =True,
-    cookie_secret ="11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2Xdwe1o%Vo",
-    login_url     ="/login",
-    autoescape    =None,
-    ui_modules    =uimodules,
+    xsrf_cookies  = True,
+    cookie_secret = "11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2Xdwe1o%Vo",
+    login_url     = "/login",
+    autoescape    = None,
+    ui_modules    = uimodules,
     debug         = True
 )
 

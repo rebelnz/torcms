@@ -1,5 +1,10 @@
 import tornado.web
 import forms
+import db
+from time import strftime
+
+from pprint import pprint
+
 
 class Form(tornado.web.UIModule):
   """
@@ -28,56 +33,90 @@ class AdminSideNavModule(tornado.web.UIModule):
 class AdminTopNavModule(tornado.web.UIModule):
     def render(self):
         # to set active class + we can add new items to nav
-        nav_items = (("/admin","Admin","icon-lock"),
-                         ("/admin/settings/site",
-                         "Settings","icon-cog"), #need url for default
-                         ("/admin/users","Users","icon-user"),
-                         ("/admin/messages","Messages","icon-inbox"),
-                         ("/","View Site","icon-eye-open"))
+        nav_items = (
+            ("/admin","Admin","icon-lock"),
+            ("/admin/settings/site","Settings","icon-cog"), #need url for default
+            ("/admin/users","Users","icon-user"),
+            ("/admin/messages","Messages","icon-inbox"),
+            ("/","View Site","icon-eye-open")
+            )
 
-        return self.render_string('admin/uimodules/admin_top_nav.html',items = nav_items)
+
+        return self.render_string('admin/uimodules/admin_top_nav.html',
+                                  items = nav_items)
 
 
 class AdminSettingsNavModule(tornado.web.UIModule):
     def render(self):
-        return self.render_string('admin/uimodules/admin_settings_nav.html')
+        nav_items = (
+            ("/admin/settings/site","Site"),
+            ("/admin/settings/analytics","Analytics"),
+            ("/admin/settings/data","Data"),
+            ("/admin/settings/campaign","Campaign"),
+            ("/admin/settings/calendar","Calendar"),
+            ("/admin/settings/map","Map"),
+            )
 
-    def javascript_files(self):
-        return "/static/js/admin-settings.js"
+        return self.render_string('admin/uimodules/admin_settings_nav.html',
+                                  items = nav_items)
 
-# class AdminSettingsSiteModule(tornado.web.UIModule):
-#     def render(self):
-#         return self.render_string('admin/uimodules/admin_settings_site.html')
+    # def javascript_files(self):
+    #     return "/static/js/admin-settings.js"
 
-class AdminSettingsContactModule(tornado.web.UIModule):
+
+class AdminSettingsSiteFormModule(tornado.web.UIModule):
     def render(self):
-        return self.render_string('admin/uimodules/admin_settings_contact.html')
+        data = db.get_site_settings()
+        if data:
+            form = forms.AdminSettingsSiteForm(
+                sitename=data["sitename"],
+                contact=data["contact"],
+                tagline=data["tagline"],
+                timezone=data["timezone"]
+                )
+        else:
+            form = forms.AdminSettingsSiteForm() # from forms file
+        return self.render_string('admin/forms/admin_settings_site_form.html',
+                                  form=form,
+                                  )
+
+class AdminSettingsSiteModule(tornado.web.UIModule):
+    def render(self):
+        # get map data too?
+        data = db.get_site_settings()
+        if data:
+            # settings["updated"] = strftime("%a, %d %b %Y %H:%M:%S +0000",data["updated"])
+            settings = data
+        else:
+            settings = False
+        return self.render_string('admin/uimodules/admin_settings_site.html',
+                                  settings=settings,
+                                  )
+
 
 class AdminSettingsCalendarModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('admin/uimodules/admin_settings_calendar.html')
 
+
 class AdminSettingsCampaignModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('admin/uimodules/admin_settings_campaign.html')
+
 
 class AdminSettingsDataModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('admin/uimodules/admin_settings_data.html')
 
+
 class AdminSettingsAnalyticsModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('admin/uimodules/admin_settings_analytics.html')
 
+
 class AdminSettingsMapModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('admin/uimodules/admin_settings_map.html')
-
-class AdminSettingsSiteModule(tornado.web.UIModule):
-    def render(self):
-        form = forms.AdminSettingsSiteForm() # from forms file
-        return self.render_string('admin/forms/admin_settings_site_form.html', form=form)
-
 
 
 # #embed map/listing edit js only if we need it
