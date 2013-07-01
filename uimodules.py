@@ -41,7 +41,7 @@ class AdminTopNavModule(tornado.web.UIModule):
             ("/","View Site","icon-eye-open")
             )
         return self.render_string('admin/uimodules/admin_top_nav.html',
-                                  items = nav_items)
+                                  nitems = nav_items)
 
 
 class AdminSettingsNavModule(tornado.web.UIModule):

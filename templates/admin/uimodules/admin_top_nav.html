@@ -11,16 +11,27 @@
         <p class="navbar-text pull-right">
           Logged in as <a href="#" class="navbar-link">Username</a>
         </p>
-		
-        <ul class="nav">
-		{% for (url,txt,icon) in items %}
-          <li {% if txt.lower() == handler.request.uri.split("/")[2] %} class="active"{% end %}>
+
+		{# find active url... #}
+		{% if len(handler.request.uri.split('/')) > 2 %}
+		{% set activeUrl = handler.request.uri.split('/')[2] %}
+		{% else %}
+		{% set activeUrl = "admin" %}
+		{% end %}
+
+		<ul class="nav">
+
+		{% for (url,txt,icon) in nitems %}
+		  <li
+		  {% if txt.lower() == activeUrl %}
+		  class="active"
+		  {% end %}>
 			<a href="{{ url }}">
 			  <i class="{{icon}}"></i> {{txt}}</a>
 		  </li>
-		{% end %}
+		  {% end %}
 		</ul>
-
+		
       </div><!--/.nav-collapse -->
 
     </div>
