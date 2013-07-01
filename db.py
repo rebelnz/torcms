@@ -5,6 +5,7 @@ import re
 import os
 import time
 import bson
+import datetime
 
 from pprint import pprint
 
@@ -17,11 +18,13 @@ def add_site_data(site_data):
 
     if settings_data:
         database.site_settings.remove({})        
-        site_data['updated'] = int(time.time())
+        # site_data['updated'] = int(time.time())
+        site_data['updated'] = datetime.datetime.now()
         database.site_settings.save(site_data)
         return site_data
     else:
-        site_data['updated'] = int(time.time())
+        site_data['updated'] = datetime.datetime.now()
+        # site_data['updated'] = int(time.time())
         database.site_settings.insert(site_data)
         return site_data
 

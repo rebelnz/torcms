@@ -40,8 +40,6 @@ class AdminTopNavModule(tornado.web.UIModule):
             ("/admin/messages","Messages","icon-inbox"),
             ("/","View Site","icon-eye-open")
             )
-
-
         return self.render_string('admin/uimodules/admin_top_nav.html',
                                   items = nav_items)
 
@@ -85,8 +83,8 @@ class AdminSettingsSiteModule(tornado.web.UIModule):
         # get map data too?
         data = db.get_site_settings()
         if data:
-            # settings["updated"] = strftime("%a, %d %b %Y %H:%M:%S +0000",data["updated"])
             settings = data
+            settings["updated"] = data["updated"].ctime() #format time
         else:
             settings = False
         return self.render_string('admin/uimodules/admin_settings_site.html',
@@ -117,6 +115,14 @@ class AdminSettingsAnalyticsModule(tornado.web.UIModule):
 class AdminSettingsMapModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('admin/uimodules/admin_settings_map.html')
+
+    def css_files(self):
+        return "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"
+
+    def javascript_files(self):
+        js_scripts = ['http://cdn.leafletjs.com/leaflet-0.5/leaflet.js',
+        '/static/js/admin-map.js','/static/js/config.js']
+        return js_scripts
 
 
 # #embed map/listing edit js only if we need it
