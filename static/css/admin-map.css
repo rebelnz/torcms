@@ -1,3 +1,7 @@
 #admin-settings-map {
     height: 400px;
 }
+
+#alert-success-info {
+    display: none;
+}

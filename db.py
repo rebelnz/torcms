@@ -18,24 +18,18 @@ def add_site_data(site_data):
 
     if settings_data:
         database.site_settings.remove({})        
-        # site_data['updated'] = int(time.time())
-        site_data['updated'] = datetime.datetime.now()
-        database.site_settings.save(site_data)
-        return site_data
-    else:
-        site_data['updated'] = datetime.datetime.now()
-        # site_data['updated'] = int(time.time())
-        database.site_settings.insert(site_data)
-        return site_data
+    site_data['updated'] = datetime.datetime.now()
+    database.site_settings.insert(site_data)
+    return site_data
 
 def get_site_settings():
     return database.site_settings.find_one()
 
 
-def add_map_data(latitude,longitude):
-    # database.map_settings.remove({})        
-    map_data = {}
+def add_map_data(map_data):
+    old_map_data = database.map_settings.find_one()
+    if old_map_data:
+        database.map_settings.remove({})        
     map_data['updated'] = datetime.datetime.now()
-    map_data['latitude'] = latitude
-    map_data['longitude'] = longitude
-    return database.map_settings.insert(map_data)
+    database.map_settings.save(map_data)
+    return map_data
