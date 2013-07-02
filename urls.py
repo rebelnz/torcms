@@ -53,10 +53,8 @@ class AdminSettingsHandler(BaseHandler):
     # form is being pulled in by sMod
     def get(self,sModule=None): #sModule from url /settings/[sModule]
         if sModule == "savemap":
-            # ajax map latlng - reply json "map saved.."
-            # insert to db
-            print(self.get_argument('lat'))
-            print(sModule)
+            db.add_map_data(self.get_argument('latitude'),self.get_argument('longitude'))
+            print(self.get_argument('latitude'),self.get_argument('longitude'))
 
         self.render('admin/admin_settings.html',sMod=sModule)
 

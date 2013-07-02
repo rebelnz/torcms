@@ -30,3 +30,12 @@ def add_site_data(site_data):
 
 def get_site_settings():
     return database.site_settings.find_one()
+
+
+def add_map_data(latitude,longitude):
+    # database.map_settings.remove({})        
+    map_data = {}
+    map_data['updated'] = datetime.datetime.now()
+    map_data['latitude'] = latitude
+    map_data['longitude'] = longitude
+    return database.map_settings.insert(map_data)
