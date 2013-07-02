@@ -27,7 +27,7 @@ class NavModule(tornado.web.UIModule):
 
 class AdminSideNavModule(tornado.web.UIModule):
     def render(self):
-        return self.render_string('admin/uimodules/admin_side_nav.html')
+        return self.render_string('admin/admin_side_nav.html')
 
 
 class AdminTopNavModule(tornado.web.UIModule):
@@ -35,12 +35,12 @@ class AdminTopNavModule(tornado.web.UIModule):
         # to set active class + we can add new items to nav
         nav_items = (
             ("/admin","Admin","icon-lock"),
-            ("/admin/settings/site","Settings","icon-cog"), #need url for default
+            ("/admin/settings/site","Settings","icon-cog"), # /site url default
             ("/admin/users","Users","icon-user"),
             ("/admin/messages","Messages","icon-inbox"),
             ("/","View Site","icon-eye-open")
             )
-        return self.render_string('admin/uimodules/admin_top_nav.html',
+        return self.render_string('admin/admin_top_nav.html',
                                   nitems = nav_items)
 
 
@@ -48,6 +48,7 @@ class AdminSettingsNavModule(tornado.web.UIModule):
     def render(self):
         nav_items = (
             ("/admin/settings/site","Site"),
+            ("/admin/settings/home","Home Page"),
             ("/admin/settings/analytics","Analytics"),
             ("/admin/settings/data","Data"),
             ("/admin/settings/campaign","Campaign"),
@@ -56,7 +57,7 @@ class AdminSettingsNavModule(tornado.web.UIModule):
             )
 
         return self.render_string('admin/uimodules/admin_settings_nav.html',
-                                  items = nav_items)
+                                  nitems = nav_items)
 
     # def javascript_files(self):
     #     return "/static/js/admin-settings.js"
@@ -65,7 +66,7 @@ class AdminSettingsNavModule(tornado.web.UIModule):
 class AdminSettingsSiteFormModule(tornado.web.UIModule):
     def render(self):
         data = db.get_site_settings()
-        if data:
+        if data: #repopulate form
             form = forms.AdminSettingsSiteForm(
                 sitename=data["sitename"],
                 contact=data["contact"],
@@ -117,12 +118,13 @@ class AdminSettingsMapModule(tornado.web.UIModule):
         return self.render_string('admin/uimodules/admin_settings_map.html')
 
     def css_files(self):
-        return "http://cdn.leafletjs.com/leaflet-0.5/leaflet.css"
+        return ['/static/css/admin-map.css',
+                'http://cdn.leafletjs.com/leaflet-0.5/leaflet.css']
+
 
     def javascript_files(self):
-        js_scripts = ['http://cdn.leafletjs.com/leaflet-0.5/leaflet.js',
+        return ['http://cdn.leafletjs.com/leaflet-0.5/leaflet.js',
         '/static/js/admin-map.js','/static/js/config.js']
-        return js_scripts
 
 
 # #embed map/listing edit js only if we need it

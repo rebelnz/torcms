@@ -6,7 +6,7 @@
 {% module AdminSettingsNavModule() %}
 
 
-<div id="admin-settings-content" class="row">
+<div id="admin-settings-content" class="row-fluid">
   
   {# we want to load only what we need... #}
   {# theres a commented out js for load() but maybe overkill #}
@@ -43,7 +43,7 @@
   {% end %}
 
   {% if sMod == "map" %}  
-  <div class="span4">
+  <div class="span10">
   {% module AdminSettingsMapModule() %}
   </div>
   {% end %}

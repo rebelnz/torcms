@@ -51,26 +51,33 @@ class AdminHandler(BaseHandler):
 
 class AdminSettingsHandler(BaseHandler):
     # form is being pulled in by sMod
-    def get(self,sModule=None):
+    def get(self,sModule=None): #sModule from url /settings/[sModule]
+        if sModule == "savemap":
+            # ajax map latlng - reply json "map saved.."
+            # insert to db
+            print(self.get_argument('lat'))
+            print(sModule)
+
         self.render('admin/admin_settings.html',sMod=sModule)
 
     def post(self, sModule=None):
         # pprint(self.request.arguments)
         if sModule == "site":
             form = forms.AdminSettingsSiteForm(self)
-        if form.validate():
-            pprint(form.data)
-            db.add_site_data(form.data)
-        else:
-            pprint(form.errors)
-            print("invalid")
+            if form.validate():
+                pprint(form.data)
+                db.add_site_data(form.data)
+            else:
+                pprint(form.errors)
+                print("invalid")
 
         self.render('admin/admin_settings.html',sMod=sModule)
 
 
 
 class AdminUsersHandler(BaseHandler):
-    def get(self):
+    def get(self,uModule=None):
+        print uModule
         self.render('admin/admin_users.html')
 
 
@@ -84,6 +91,6 @@ handlers = [
     (r"/login", LoginHandler),
     (r"/admin", AdminHandler),
     (r"/admin/settings/([^/]+)",AdminSettingsHandler),
-    (r"/admin/users", AdminUsersHandler),
+    (r"/admin/users/([^/]+)", AdminUsersHandler),
     (r"/admin/messages", AdminMessagesHandler),
 ]

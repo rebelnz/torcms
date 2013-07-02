@@ -168,5 +168,3 @@ class MultiValueDict(dict):
     for key, value in kwargs.iteritems():
       self.setlistdefault(key, []).append(value)
 
-      # for timezone dropdown      
-TZList = [('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')]

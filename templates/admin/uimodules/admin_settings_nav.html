@@ -1,6 +1,6 @@
 <ul class="nav nav-tabs" id="admin-settings-nav">
   
-  {% for (url,txt) in items %}
+  {% for (url,txt) in nitems %}
   <li {% if url == handler.request.uri %} class="active"{% end %}>
 	<a href="{{ url }}"> {{txt}}</a>
   </li>
