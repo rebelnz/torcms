@@ -1,7 +1,7 @@
 #settings
 import os.path
 import uimodules
-
+import adminmodules
 
 from tornado.options import define
 
@@ -18,7 +18,7 @@ settings = dict(
     cookie_secret = "11oETzKXQAGaYdkL5gEmGeJJFuYh7EQnp2Xdwe1o%Vo",
     login_url     = "/login",
     autoescape    = None,
-    ui_modules    = uimodules,
+    ui_modules    = [uimodules,adminmodules],
     debug         = True
 )
 
