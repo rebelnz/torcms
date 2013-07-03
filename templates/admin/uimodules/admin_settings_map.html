@@ -1,5 +1,8 @@
 <div class="tab-pane" id="settings-map">
   <div id="admin-settings-map">
+	<div id="loader">
+	  <img src="{{ static_url("img/loading.gif") }}"  alt="loading map"/>	  
+	</div>
   </div>
   
   <div id="admin-settings-info">
@@ -7,15 +10,17 @@
     <div class="alert alert-info" id="alert-map-info">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
       <h4>Add Location</h4>
-      Click on the map to select your location
+      Click on the map to select your location and save
     </div>
     
     <div class="alert alert-success" id="alert-success-info">
       <button type="button" class="close" data-dismiss="alert">&times;</button>
-      Location has been updated
+      Map location has been updated
     </div>
     
-    <p id="map-save-result"><p>
+    <p id="map-save-result"><a href="#" class="btn btn-primary">Save</a><p>
+	  
   </div>
+
   
 </div>

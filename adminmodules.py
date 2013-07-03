@@ -22,7 +22,7 @@ class AdminTopNavModule(tornado.web.UIModule):
         return self.render_string('admin/admin_top_nav.html',
                                   nitems = nav_items)
 
-
+    
 class AdminSettingsNavModule(tornado.web.UIModule):
     def render(self):
         nav_items = (
@@ -42,10 +42,9 @@ class AdminSettingsNavModule(tornado.web.UIModule):
     # def javascript_files(self):
     #     return "/static/js/admin-settings.js"
 
-
+    # settings module
 class AdminSettingsSiteModule(tornado.web.UIModule):
     def render(self):
-        # get map data too?
         data = db.get_site_settings()
         if data:
             settings = data
@@ -55,7 +54,7 @@ class AdminSettingsSiteModule(tornado.web.UIModule):
         return self.render_string('admin/uimodules/admin_settings_site.html',
                                   settings=settings,
                                   )
-
+    #settings form
 class AdminSettingsSiteFormModule(tornado.web.UIModule):
     def render(self):
         data = db.get_site_settings()
@@ -72,7 +71,40 @@ class AdminSettingsSiteFormModule(tornado.web.UIModule):
                                   form=form,
                                   )
 
+    # map module
+class AdminSettingsMapModule(tornado.web.UIModule):
+    def render(self):
+        form = forms.AdminSettingsAddressForm() # from forms file
+        return self.render_string('admin/uimodules/admin_settings_map.html')
+       
 
+    def css_files(self):
+        return ['/static/css/admin-map.css',
+                'http://cdn.leafletjs.com/leaflet-0.5/leaflet.css']
+
+
+    def javascript_files(self):
+        return ['http://cdn.leafletjs.com/leaflet-0.5/leaflet.js',
+        '/static/js/admin-map.js','/static/js/config.js']
+
+    # address module    
+class AdminSettingsAddressFormModule(tornado.web.UIModule):
+    def render(self):
+        data = db.get_address_settings()
+        if data: #repopulate form
+            form = forms.AdminSettingsAddressForm(
+                address=data["address"],
+                suburb=data["suburb"],
+                city=data["city"],
+                zipcode=data["zipcode"]
+                )
+        else:
+          form = forms.AdminSettingsAddressForm() # from forms file
+        return self.render_string('admin/forms/admin_settings_address_form.html',
+                                  form=form,
+                                  )
+
+    
 class AdminSettingsCalendarModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('admin/uimodules/admin_settings_calendar.html')
@@ -92,35 +124,4 @@ class AdminSettingsAnalyticsModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('admin/uimodules/admin_settings_analytics.html')
 
-
-class AdminSettingsMapModule(tornado.web.UIModule):
-    def render(self):
-        form = forms.AdminSettingsAddressForm() # from forms file
-        return self.render_string('admin/uimodules/admin_settings_map.html')
-       
-
-    def css_files(self):
-        return ['/static/css/admin-map.css',
-                'http://cdn.leafletjs.com/leaflet-0.5/leaflet.css']
-
-
-    def javascript_files(self):
-        return ['http://cdn.leafletjs.com/leaflet-0.5/leaflet.js',
-        '/static/js/admin-map.js','/static/js/config.js']
-
-class AdminSettingsAddressFormModule(tornado.web.UIModule):
-    def render(self):
-        data = db.get_address_settings()
-        if data: #repopulate form
-            form = forms.AdminSettingsAddressForm(
-                address=data["address"],
-                suburb=data["suburb"],
-                city=data["city"],
-                zipcode=data["zipcode"]
-                )
-        else:
-          form = forms.AdminSettingsAddressForm() # from forms file
-        return self.render_string('admin/forms/admin_settings_address_form.html',
-                                  form=form,
-                                  )
 

@@ -16,7 +16,7 @@ database = connection.torcms
 def add_site_data(site_data):
     settings_data = database.site_settings.find_one()
     if settings_data:
-        database.site_settings.remove({})        
+        database.site_settings.remove({})
     site_data['updated'] = datetime.datetime.now()
     database.site_settings.insert(site_data)
     return site_data
@@ -28,7 +28,7 @@ def get_site_settings():
 def add_address_data(address_data):
     old_address_data = database.address_settings.find_one()
     if old_address_data:
-        database.address_settings.remove({})        
+        database.address_settings.remove({})
     address_data['updated'] = datetime.datetime.now()
     database.address_settings.insert(address_data)
     return address_data
@@ -40,7 +40,14 @@ def get_address_settings():
 def add_map_data(map_data):
     old_map_data = database.map_settings.find_one()
     if old_map_data:
-        database.map_settings.remove({})        
+        database.map_settings.remove({})
     map_data['updated'] = datetime.datetime.now()
     database.map_settings.save(map_data)
     return map_data
+
+def get_map():
+    data = database.map_settings.find_one()
+    mapdata = {}
+    if data:
+        mapdata = data['loc'] # [{"latitude": "37.50209991181568"}, {"longitude": "126.77947998046875"}]
+    return mapdata

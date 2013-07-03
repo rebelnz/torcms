@@ -1,7 +1,16 @@
 #admin-settings-map {
+    position: relative;
     height: 252px;
 }
 
 #alert-success-info {
     display: none;
 }
+
+#loader {
+    margin: auto;
+    position : absolute;
+    top : 40%;
+    left: 45%;
+}
+    

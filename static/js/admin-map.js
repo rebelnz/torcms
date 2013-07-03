@@ -1,11 +1,41 @@
 $(function() {
-	
-	// get latlng ready to save to db - ajax
-	// add params to button
-	// console.log(MapConfig['apikeys']['cloudmade']);
 
+	$.ajaxSetup({
+		beforeSend: function() {
+			$('#loader').show();
+		},
+		complete: function(){
+			$('#loader').hide();
+		},
+		success: function() {}
+	});
+
+	getMapData();
 	
-	var map = L.map('admin-settings-map').setView([37.5408,126.971269],13); 
+});
+
+function getMapData() {
+	$.get("/admin/json/getmap", function(data) {
+		buildMap(data);
+	}, 'json');		
+}
+
+
+function buildMap(mapdata) {
+	
+	// console.log(mapdata[0]);
+	var dataLat;
+	var dataLong;
+
+	if(typeof(mapdata[0])!=='undefined') {
+		dataLat = Number(mapdata[0]['latitude']) || 37.5408;
+		dataLong = Number(mapdata[1]['longitude']) || 126.971269;
+	} else {
+		dataLat = 37.5408;
+		dataLong = 126.971269;
+	}
+
+	var map = L.map('admin-settings-map').setView([dataLat,dataLong],13); 
 	L.tileLayer('http://{s}.tile.cloudmade.com/' 
 				+ MapConfig['apikeys']['cloudmade'] 
 				+ '/997/256/{z}/{x}/{y}.png', {
@@ -15,6 +45,8 @@ $(function() {
 					Imagery © <a href="http://cloudmade.com">CloudMade</a>',
 					maxZoom: 18
 				}).addTo(map);
+
+	var marker = L.marker([dataLat,dataLong]).addTo(map);
     
     var popup = L.popup();
 	
@@ -23,33 +55,33 @@ $(function() {
 			.setLatLng(e.latlng)
 			.setContent(e.latlng.toString())
 			.openOn(map);
-		
+
+		map.removeLayer(marker);		
+
 		makeBtn(e.latlng);
 
 		$('#map-save-result').click(function() { 
 			saveLatLng(e.latlng);
-			return false; } );
+			return false; 
+		});
+
     }
-
     map.on('click',onMapClick);
-	
-});
-
-
-function makeBtn(latlng) {
-	$('#map-save-result a').remove();
-	url = '/admin/settings/savemap?latitude=' + latlng.lat + '&longitude=' + latlng.lng;
-	$('#map-save-result')
-		.append('<a href="' + url + '" class="btn">save</a>');
 }
 
 
-// add params to button ready to be saved
+function makeBtn(latlng) {	
+	var url = '/admin/settings/savemap?latitude=' + latlng.lat + '&longitude=' + latlng.lng;
+	$('#map-save-result a').attr("href",url);
+	url = "";
+}
+
+
 function saveLatLng(latlng) {
     $.get("/admin/settings/savemap", { latitude: latlng.lat, longitude: latlng.lng } )
 		.done(function() {
-    		$('#map-save-result a, #alert-map-info').remove();
-			$('#alert-success-info').show();
+			$('#alert-success-info').show().delay('4000').fadeOut();
 		});
+
 	return false;
 }

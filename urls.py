@@ -1,6 +1,7 @@
 import tornado.web
 import db
 import forms
+import simplejson
 
 from util import MultiValueDict
 from pprint import pprint
@@ -79,9 +80,13 @@ class AdminSettingsHandler(BaseHandler):
             else:
                 pprint(form.errors)
                 print("invalid")
-    
+
         self.render('admin/admin_settings.html',sMod=sModule)
 
+class AdminJsonGetMapHandler(BaseHandler):
+    def get(self):
+        mapdata = db.get_map()
+        self.write(simplejson.dumps(mapdata))
 
 
 class AdminUsersHandler(BaseHandler):
@@ -102,4 +107,5 @@ handlers = [
     (r"/admin/settings/([^/]+)",AdminSettingsHandler),
     (r"/admin/users/([^/]+)", AdminUsersHandler),
     (r"/admin/messages", AdminMessagesHandler),
+    (r"/admin/json/getmap", AdminJsonGetMapHandler),
 ]
