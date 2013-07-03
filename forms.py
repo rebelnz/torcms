@@ -24,7 +24,13 @@ class AdminSettingsSiteForm(BaseForm):
   sitename  = TextField(u'Site Name*',[Required()])
   contact   = TextField(u'Contact*',[Required()])
   tagline   = TextField(u'Tag Line')
-  timezone = SelectField('Timezone',
+  timezone  = SelectField('Timezone',
         choices = [(tz, tz) for tz in pytz.common_timezones],
         coerce=unicode, description="Timezone"
     )
+
+class AdminSettingsAddressForm(BaseForm):
+  address = TextField(u'Address*',[Required()])
+  suburb  = TextField(u'Suburb')
+  city    = TextField(u'City')
+  zipcode = TextField(u'Zip Code',[Required()])

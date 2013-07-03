@@ -41,7 +41,6 @@ function makeBtn(latlng) {
 	url = '/admin/settings/savemap?latitude=' + latlng.lat + '&longitude=' + latlng.lng;
 	$('#map-save-result')
 		.append('<a href="' + url + '" class="btn">save</a>');
-
 }
 
 

@@ -63,6 +63,19 @@ class AdminSettingsNavModule(tornado.web.UIModule):
     #     return "/static/js/admin-settings.js"
 
 
+class AdminSettingsSiteModule(tornado.web.UIModule):
+    def render(self):
+        # get map data too?
+        data = db.get_site_settings()
+        if data:
+            settings = data
+            settings["updated"] = data["updated"].ctime() #format time
+        else:
+            settings = False
+        return self.render_string('admin/uimodules/admin_settings_site.html',
+                                  settings=settings,
+                                  )
+
 class AdminSettingsSiteFormModule(tornado.web.UIModule):
     def render(self):
         data = db.get_site_settings()
@@ -77,19 +90,6 @@ class AdminSettingsSiteFormModule(tornado.web.UIModule):
             form = forms.AdminSettingsSiteForm() # from forms file
         return self.render_string('admin/forms/admin_settings_site_form.html',
                                   form=form,
-                                  )
-
-class AdminSettingsSiteModule(tornado.web.UIModule):
-    def render(self):
-        # get map data too?
-        data = db.get_site_settings()
-        if data:
-            settings = data
-            settings["updated"] = data["updated"].ctime() #format time
-        else:
-            settings = False
-        return self.render_string('admin/uimodules/admin_settings_site.html',
-                                  settings=settings,
                                   )
 
 
@@ -115,7 +115,9 @@ class AdminSettingsAnalyticsModule(tornado.web.UIModule):
 
 class AdminSettingsMapModule(tornado.web.UIModule):
     def render(self):
+        form = forms.AdminSettingsAddressForm() # from forms file
         return self.render_string('admin/uimodules/admin_settings_map.html')
+       
 
     def css_files(self):
         return ['/static/css/admin-map.css',
@@ -125,6 +127,23 @@ class AdminSettingsMapModule(tornado.web.UIModule):
     def javascript_files(self):
         return ['http://cdn.leafletjs.com/leaflet-0.5/leaflet.js',
         '/static/js/admin-map.js','/static/js/config.js']
+
+class AdminSettingsAddressFormModule(tornado.web.UIModule):
+    def render(self):
+        # data = db.get_site_settings()
+        # if data: #repopulate form
+        #     form = forms.AdminSettingsSiteForm(
+        #         sitename=data["sitename"],
+        #         contact=data["contact"],
+        #         tagline=data["tagline"],
+        #         timezone=data["timezone"]
+        #         )
+        # else:
+        form = forms.AdminSettingsAddressForm() # from forms file
+        return self.render_string('admin/forms/admin_settings_address_form.html',
+                                  form=form,
+                                  )
+
 
 
 # #embed map/listing edit js only if we need it

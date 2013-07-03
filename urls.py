@@ -53,13 +53,12 @@ class AdminSettingsHandler(BaseHandler):
     # form is being pulled in by sMod
     def get(self,sModule=None): #sModule from url /settings/[sModule]
         if sModule == "savemap":
-            map_data = {
-                'latitude': self.get_argument('latitude'),
-                'longitude': self.get_argument('longitude')}
-            
-            db.add_map_data(map_data)
-            # pprint(self.get_argument('latitude'),self.get_argument('longitude'))
-            pprint(map_data)
+            data = {'loc':[ #TODO - check latlong are saved as int?
+                {'latitude': self.get_argument('latitude')},
+                {'longitude': self.get_argument('longitude')}]
+                }
+            db.add_map_data(data)
+            pprint(data)
 
         self.render('admin/admin_settings.html',sMod=sModule)
 
@@ -68,7 +67,6 @@ class AdminSettingsHandler(BaseHandler):
         if sModule == "site":
             form = forms.AdminSettingsSiteForm(self)
             if form.validate():
-                pprint(form.data)
                 db.add_site_data(form.data)
             else:
                 pprint(form.errors)

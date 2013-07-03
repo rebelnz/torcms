@@ -43,9 +43,14 @@
   {% end %}
 
   {% if sMod == "map" %}  
-  <div class="span10">
-  {% module AdminSettingsMapModule() %}
+  <div class="span6">
+	{% module AdminSettingsMapModule() %}
   </div>
+
+  <div class="span4">
+	{% module AdminSettingsAddressFormModule() %}
+  </div>
+
   {% end %}
 
 </div>
