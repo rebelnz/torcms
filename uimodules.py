@@ -48,12 +48,13 @@ class AdminSettingsNavModule(tornado.web.UIModule):
     def render(self):
         nav_items = (
             ("/admin/settings/site","Site"),
+            ("/admin/settings/map","Map"),
+            ("/admin/settings/social","Social"),
             ("/admin/settings/home","Home Page"),
             ("/admin/settings/analytics","Analytics"),
             ("/admin/settings/data","Data"),
             ("/admin/settings/campaign","Campaign"),
             ("/admin/settings/calendar","Calendar"),
-            ("/admin/settings/map","Map"),
             )
 
         return self.render_string('admin/uimodules/admin_settings_nav.html',
@@ -130,16 +131,16 @@ class AdminSettingsMapModule(tornado.web.UIModule):
 
 class AdminSettingsAddressFormModule(tornado.web.UIModule):
     def render(self):
-        # data = db.get_site_settings()
-        # if data: #repopulate form
-        #     form = forms.AdminSettingsSiteForm(
-        #         sitename=data["sitename"],
-        #         contact=data["contact"],
-        #         tagline=data["tagline"],
-        #         timezone=data["timezone"]
-        #         )
-        # else:
-        form = forms.AdminSettingsAddressForm() # from forms file
+        data = db.get_address_settings()
+        if data: #repopulate form
+            form = forms.AdminSettingsAddressForm(
+                address=data["address"],
+                suburb=data["suburb"],
+                city=data["city"],
+                zipcode=data["zipcode"]
+                )
+        else:
+          form = forms.AdminSettingsAddressForm() # from forms file
         return self.render_string('admin/forms/admin_settings_address_form.html',
                                   form=form,
                                   )

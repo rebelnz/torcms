@@ -72,6 +72,14 @@ class AdminSettingsHandler(BaseHandler):
                 pprint(form.errors)
                 print("invalid")
 
+        elif sModule == "map":
+            form = forms.AdminSettingsAddressForm(self)
+            if form.validate():
+                db.add_address_data(form.data)
+            else:
+                pprint(form.errors)
+                print("invalid")
+    
         self.render('admin/admin_settings.html',sMod=sModule)
 
 

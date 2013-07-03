@@ -12,26 +12,26 @@
           Logged in as <a href="#" class="navbar-link">Username</a>
         </p>
 
-		{# find active url to add class - avoid IndexError #}
-		{% if len(handler.request.uri.split('/')) > 2 %}
-		{% set activeUrl = handler.request.uri.split('/')[2] %}
-		{% else %}
-		{% set activeUrl = "admin" %}
-		{% end %}
+        {# find active url to add class - avoid IndexError #}
+        {% if len(handler.request.uri.split('/')) > 2 %}
+        {% set activeUrl = handler.request.uri.split('/')[2] %}
+        {% else %}
+        {% set activeUrl = "admin" %}
+        {% end %}
 
-		<ul class="nav">
+        <ul class="nav">
 
-		{% for (url,txt,icon) in nitems %}
-		  <li
-		  {% if txt.lower() == activeUrl %}
-		  class="active"
-		  {% end %}>
-			<a href="{{ url }}">
-			  <i class="{{icon}}"></i> {{txt}}</a>
-		  </li>
-		  {% end %}
-		</ul>
-		
+          {% for (url,txt,icon) in nitems %}
+          <li
+             {% if txt.lower() == activeUrl %}
+             class="active"
+             {% end %}>
+            <a href="{{ url }}">
+              <i class="{{icon}}"></i> {{txt}}</a>
+          </li>
+          {% end %}
+        </ul>
+        
       </div><!--/.nav-collapse -->
 
     </div>
