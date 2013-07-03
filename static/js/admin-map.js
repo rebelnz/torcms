@@ -23,7 +23,6 @@ function getMapData() {
 
 function buildMap(mapdata) {
 	
-	// console.log(mapdata[0]);
 	var dataLat;
 	var dataLong;
 
@@ -36,6 +35,8 @@ function buildMap(mapdata) {
 	}
 
 	var map = L.map('admin-settings-map').setView([dataLat,dataLong],13); 
+	var marker = L.marker([dataLat,dataLong], {draggable:true}).addTo(map);
+
 	L.tileLayer('http://{s}.tile.cloudmade.com/' 
 				+ MapConfig['apikeys']['cloudmade'] 
 				+ '/997/256/{z}/{x}/{y}.png', {
@@ -45,43 +46,20 @@ function buildMap(mapdata) {
 					Imagery © <a href="http://cloudmade.com">CloudMade</a>',
 					maxZoom: 18
 				}).addTo(map);
-
-	var marker = L.marker([dataLat,dataLong]).addTo(map);
-    
-    var popup = L.popup();
 	
-    function onMapClick(e) {
-		popup
-			.setLatLng(e.latlng)
-			.setContent(e.latlng.toString())
-			.openOn(map);
+    marker.on('dragend' , function(evt) {
+		saveLatLng(evt.target._latlng);
+	});
+	
 
-		map.removeLayer(marker);		
-
-		makeBtn(e.latlng);
-
-		$('#map-save-result').click(function() { 
-			saveLatLng(e.latlng);
-			return false; 
-		});
-
-    }
-    map.on('click',onMapClick);
-}
-
-
-function makeBtn(latlng) {	
-	var url = '/admin/settings/savemap?latitude=' + latlng.lat + '&longitude=' + latlng.lng;
-	$('#map-save-result a').attr("href",url);
-	url = "";
 }
 
 
 function saveLatLng(latlng) {
     $.get("/admin/settings/savemap", { latitude: latlng.lat, longitude: latlng.lng } )
 		.done(function() {
-			$('#alert-success-info').show().delay('4000').fadeOut();
+			$('#alert-success-info').show().delay('2000').fadeOut();
 		});
-
-	return false;
 }
+
+
