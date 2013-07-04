@@ -59,8 +59,6 @@ class AdminSettingsHandler(BaseHandler):
                 {'longitude': self.get_argument('longitude')}]
                 }
             db.add_map_data(data)
-            pprint(data)
-
         self.render('admin/admin_settings.html',sMod=sModule)
 
     def post(self, sModule=None):
@@ -80,8 +78,8 @@ class AdminSettingsHandler(BaseHandler):
             else:
                 pprint(form.errors)
                 print("invalid")
-                
-        elif sModule == "map": # map added from AdminJsonGetMapHandler 
+
+        elif sModule == "map": # map added from AdminJsonGetMapHandler
             form = forms.AdminSettingsAddressForm(self)
             if form.validate():
                 db.add_address_data(form.data)
@@ -109,8 +107,11 @@ class AdminMessagesHandler(BaseHandler):
 
 class JsonTrackerHandler(BaseHandler):
     def get(self):
-        pprint(self.request)
-
+        tdata = self.request.arguments
+        # jdata = {'innaWidth': self.get_argument('innerW')},
+        pprint(tdata)
+        self.write(simplejson.dumps(tdata))
+    
 handlers = [
     (r"/", IndexHandler),
     (r"/login", LoginHandler),
