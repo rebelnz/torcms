@@ -13,14 +13,36 @@
   {# forms are being added to module through uimodules... #}
   
   {% if sMod == "site" %}  
-  <div class="span5">
+  <div class="span3">
     {% module AdminSettingsSiteFormModule() %}
   </div>
 
-  <div class="span5">
+  <div class="span9">
     {% module AdminSettingsSiteModule() %}
   </div>
   {% end %}  
+
+
+  {% if sMod == "map" %}  
+  <div class="span6">
+    {% module AdminSettingsMapModule() %}
+  </div>
+  <div class="span4">
+    {% module AdminSettingsAddressFormModule() %}
+  </div>
+  {% end %}
+
+
+  {% if sMod == "social" %}  
+  <div class="span3">
+    {% module AdminSettingsSocialFormModule() %}
+  </div>
+
+  <div class="span9">
+    {% module AdminSettingsSocialModule() %}
+  </div>
+  {% end %}
+
 
   {% if sMod == "contact" %}  
   {% module AdminSettingsContactModule() %}
@@ -40,17 +62,6 @@
 
   {% if sMod == "calendar" %}  
   {% module AdminSettingsCalendarModule() %}
-  {% end %}
-
-  {% if sMod == "map" %}  
-  <div class="span6">
-    {% module AdminSettingsMapModule() %}
-  </div>
-
-  <div class="span4">
-    {% module AdminSettingsAddressFormModule() %}
-  </div>
-
   {% end %}
 
 </div>

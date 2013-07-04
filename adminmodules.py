@@ -39,8 +39,8 @@ class AdminSettingsNavModule(tornado.web.UIModule):
         return self.render_string('admin/uimodules/admin_settings_nav.html',
                                   nitems = nav_items)
 
-    # def javascript_files(self):
-    #     return "/static/js/admin-settings.js"
+    # def css_files(self):
+    #     return "/static/css/admin-settings-site.css"
 
     # settings module
 class AdminSettingsSiteModule(tornado.web.UIModule):
@@ -79,7 +79,7 @@ class AdminSettingsMapModule(tornado.web.UIModule):
        
 
     def css_files(self):
-        return ['/static/css/admin-map.css',
+        return ['/static/css/admin-settings-map.css',
                 'http://cdn.leafletjs.com/leaflet-0.5/leaflet.css']
 
 
@@ -104,6 +104,38 @@ class AdminSettingsAddressFormModule(tornado.web.UIModule):
                                   form=form,
                                   )
 
+
+    # social module
+class AdminSettingsSocialModule(tornado.web.UIModule):
+    def render(self):
+        data = db.get_social_settings()
+        if data:
+            settings = data
+            settings["updated"] = data["updated"].ctime() #format time
+        else:
+            settings = False
+        return self.render_string('admin/uimodules/admin_settings_social.html',
+                                  settings=settings,
+                                  )
+    # form
+class AdminSettingsSocialFormModule(tornado.web.UIModule):
+    def render(self):
+        data = db.get_social_settings()
+        if data: #repopulate form
+            form = forms.AdminSettingsSocialForm(
+                facebook=data["facebook"],
+                googleplus=data["googleplus"],
+                kakao=data["kakao"],
+                twitter=data["twitter"],
+                linkedin=data["linkedin"]
+                )
+        else:
+            form = forms.AdminSettingsSocialForm() # from forms file
+        return self.render_string('admin/forms/admin_settings_social_form.html',
+                                  form=form,
+                                  )
+
+    
     
 class AdminSettingsCalendarModule(tornado.web.UIModule):
     def render(self):

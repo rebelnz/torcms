@@ -25,18 +25,21 @@ function buildMap(mapdata) {
 	
 	var dataLat;
 	var dataLong;
+	var zoomLevel;
 
 	if(typeof(mapdata[0])!=='undefined') {
 		dataLat = Number(mapdata[0]['latitude']) || 37.5408;
 		dataLong = Number(mapdata[1]['longitude']) || 126.971269;
-	} else {
+		zoomLevel = 13;
+	} else { // default and zoomed out 
 		dataLat = 37.5408;
 		dataLong = 126.971269;
+		zoomLevel = 1;
 	}
 
-	var map = L.map('admin-settings-map').setView([dataLat,dataLong],13); 
+	var map = L.map('admin-settings-map').setView([dataLat,dataLong],zoomLevel); 
 	var marker = L.marker([dataLat,dataLong], {draggable:true}).addTo(map);
-
+	
 	L.tileLayer('http://{s}.tile.cloudmade.com/' 
 				+ MapConfig['apikeys']['cloudmade'] 
 				+ '/997/256/{z}/{x}/{y}.png', {
@@ -46,12 +49,11 @@ function buildMap(mapdata) {
 					Imagery © <a href="http://cloudmade.com">CloudMade</a>',
 					maxZoom: 18
 				}).addTo(map);
-	
+
     marker.on('dragend' , function(evt) {
 		saveLatLng(evt.target._latlng);
 	});
 	
-
 }
 
 

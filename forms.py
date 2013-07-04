@@ -33,4 +33,13 @@ class AdminSettingsAddressForm(BaseForm):
   address = TextField(u'Address*',[Required()])
   suburb  = TextField(u'Suburb')
   city    = TextField(u'City')
-  zipcode = TextField(u'Zip Code',[Required()])
+  zipcode = TextField(u'Zip Code*',[Required()])
+
+
+class AdminSettingsSocialForm(BaseForm):
+  facebook = TextField(u'Facebook')
+  googleplus  = TextField(u'Google+')
+  kakao    = TextField(u'Kakao')
+  twitter = TextField(u'Twitter')
+  linkedin = TextField(u'Linkedin')
+  

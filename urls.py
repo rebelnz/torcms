@@ -73,7 +73,15 @@ class AdminSettingsHandler(BaseHandler):
                 pprint(form.errors)
                 print("invalid")
 
-        elif sModule == "map":
+        elif sModule == "social":
+            form = forms.AdminSettingsSocialForm(self)
+            if form.validate():
+                db.add_social_data(form.data)
+            else:
+                pprint(form.errors)
+                print("invalid")
+                
+        elif sModule == "map": # map added from AdminJsonGetMapHandler 
             form = forms.AdminSettingsAddressForm(self)
             if form.validate():
                 db.add_address_data(form.data)
@@ -85,7 +93,7 @@ class AdminSettingsHandler(BaseHandler):
 
 class AdminJsonGetMapHandler(BaseHandler):
     def get(self):
-        mapdata = db.get_map()
+        mapdata = db.get_map_data()
         self.write(simplejson.dumps(mapdata))
 
 

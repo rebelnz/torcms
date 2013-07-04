@@ -45,9 +45,20 @@ def add_map_data(map_data):
     database.map_settings.save(map_data)
     return map_data
 
-def get_map():
+def get_map_data():
     data = database.map_settings.find_one()
     mapdata = {}
     if data:
         mapdata = data['loc'] # [{"latitude": "37.50209991181568"}, {"longitude": "126.77947998046875"}]
     return mapdata
+
+def add_social_data(data):
+    social_data = database.social_settings.find_one()
+    if social_data:
+        database.social_settings.remove({})
+    data['updated'] = datetime.datetime.now()
+    database.social_settings.insert(data)
+    return data
+
+def get_social_settings():
+    return database.social_settings.find_one()

@@ -1,0 +1,65 @@
+<form action="" method="post" enctype="multipart/form-data" class="form">
+{% raw xsrf_form_html() %}
+
+<div class="control-group">
+  <label class="control-label" for="facebook">Facebook</label>
+  <div class="controls">
+    {{ form.facebook() }}
+    {% if form.facebook.errors %}
+    {% for error in form.facebook.errors %}
+    <span class="errors">{{ error }}</span>
+    {% end %}
+    {% end %}
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="googleplus">Google+</label>
+  <div class="controls">
+    {{ form.googleplus() }}
+    {% if form.googleplus.errors %}
+    {% for error in form.googleplus.errors %}
+    <span class="errors">{{ error }}</span>
+    {% end %}
+    {% end %}
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="kakao">Kakao</label>
+  <div class="controls">
+    {{ form.kakao() }}
+    {% if form.kakao.errors %}
+    {% for error in form.kakao.errors %}
+    <span class="errors">{{ error }}</span>
+    {% end %}
+    {% end %}
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="twitter">Twitter</label>
+  <div class="controls">
+    {{ form.twitter() }}
+    {% if form.twitter.errors %}
+    {% for error in form.twitter.errors %}
+    <span class="errors">{{ error }}</span>
+    {% end %}
+    {% end %}
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="linkedin">Linkedin</label>
+  <div class="controls">
+    {{ form.linkedin() }}
+    {% if form.linkedin.errors %}
+    {% for error in form.linkedin.errors %}
+    <span class="errors">{{ error }}</span>
+    {% end %}
+    {% end %}
+
+  </div>
+</div>
+<button type="submit" class="btn btn-primary">Save</button>
+</form>
