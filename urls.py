@@ -107,6 +107,9 @@ class AdminMessagesHandler(BaseHandler):
     def get(self):
         self.render('admin/admin_messages.html')
 
+class JsonTrackerHandler(BaseHandler):
+    def get(self):
+        pprint(self.request)
 
 handlers = [
     (r"/", IndexHandler),
@@ -116,4 +119,5 @@ handlers = [
     (r"/admin/users/([^/]+)", AdminUsersHandler),
     (r"/admin/messages", AdminMessagesHandler),
     (r"/admin/json/getmap", AdminJsonGetMapHandler),
+    (r"/json/tracker", JsonTrackerHandler),
 ]

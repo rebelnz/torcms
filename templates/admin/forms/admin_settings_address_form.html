@@ -1,55 +1,52 @@
 <form action="" method="post" enctype="multipart/form-data" class="form">
-{% raw xsrf_form_html() %}
+  {% raw xsrf_form_html() %}
 
-<div class="control-group">
-  <label class="control-label" for="address">Address</label>
-  <div class="controls">
-  {{ form.address() }}
-	   {% if form.address.errors %}
-	   {% for error in form.address.errors %}
-	   <span class="errors">{{ error }}</span>
-	   {% end %}
-	   {% end %}
-</div>
-</div>
+  <div class="control-group">
+    <label class="control-label" for="address">Address</label>
+    <div class="controls">
+      {{ form.address() }}
+      {% if form.address.errors %}
+      {% for error in form.address.errors %}
+      <span class="errors">{{ error }}</span>
+      {% end %}
+      {% end %}
+    </div>
+  </div>
 
-<div class="control-group">
-  <label class="control-label" for="suburb">Suburb</label>
-  <div class="controls">
-  {{ form.suburb() }}
-	   {% if form.suburb.errors %}
-	   {% for error in form.suburb.errors %}
-	   <span class="errors">{{ error }}</span>
-	   {% end %}
-	   {% end %}
-</div>
-</div>
+  <div class="control-group">
+    <label class="control-label" for="suburb">Suburb</label>
+    <div class="controls">
+      {{ form.suburb() }}
+      {% if form.suburb.errors %}
+      {% for error in form.suburb.errors %}
+      <span class="errors">{{ error }}</span>
+      {% end %}
+      {% end %}
+    </div>
+  </div>
 
-<div class="control-group">
-  <label class="control-label" for="city">City</label>
-  <div class="controls">
-  {{ form.city() }}
-	   {% if form.city.errors %}
-	   {% for error in form.city.errors %}
-	   <span class="errors">{{ error }}</span>
-	   {% end %}
-	   {% end %}
-</div>
-</div>
+  <div class="control-group">
+    <label class="control-label" for="city">City</label>
+    <div class="controls">
+      {{ form.city() }}
+      {% if form.city.errors %}
+      {% for error in form.city.errors %}
+      <span class="errors">{{ error }}</span>
+      {% end %}
+      {% end %}
+    </div>
+  </div>
+  <div class="control-group">
+    <label class="control-label" for="zipcode">Zipcode</label>
+    <div class="controls">
+      {{ form.zipcode() }}
+      {% if form.zipcode.errors %}
+      {% for error in form.zipcode.errors %}
+      <span class="errors">{{ error }}</span>
+      {% end %}
+      {% end %}
+    </div>
+  </div>
 
-
-<div class="control-group">
-  <label class="control-label" for="zipcode">Zipcode</label>
-  <div class="controls">
-  {{ form.zipcode() }}
-	   {% if form.zipcode.errors %}
-	   {% for error in form.zipcode.errors %}
-	   <span class="errors">{{ error }}</span>
-	   {% end %}
-	   {% end %}
-</div>
-</div>
-
-<button type="submit" class="btn btn-primary">Save changes</button>
-  <button type="button" class="btn">Cancel</button>
+  <button type="submit" class="btn btn-primary">Save</button>
 </form>

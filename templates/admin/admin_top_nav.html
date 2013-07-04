@@ -20,7 +20,6 @@
         {% end %}
 
         <ul class="nav">
-
           {% for (url,txt,icon) in nitems %}
           <li {% if txt.lower() == activeUrl %} class="active"{% end %}>
             <a href="{{ url }}"><i class="{{icon}}"></i> {{txt}}</a>

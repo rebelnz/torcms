@@ -76,16 +76,15 @@ class AdminSettingsMapModule(tornado.web.UIModule):
     def render(self):
         form = forms.AdminSettingsAddressForm() # from forms file
         return self.render_string('admin/uimodules/admin_settings_map.html')
-       
 
     def css_files(self):
         return ['/static/css/admin-settings-map.css',
                 'http://cdn.leafletjs.com/leaflet-0.5/leaflet.css']
 
-
     def javascript_files(self):
         return ['http://cdn.leafletjs.com/leaflet-0.5/leaflet.js',
         '/static/js/admin-map.js','/static/js/config.js']
+
 
     # address module    
 class AdminSettingsAddressFormModule(tornado.web.UIModule):
@@ -155,5 +154,8 @@ class AdminSettingsDataModule(tornado.web.UIModule):
 class AdminSettingsAnalyticsModule(tornado.web.UIModule):
     def render(self):
         return self.render_string('admin/uimodules/admin_settings_analytics.html')
+
+    def javascript_files(self):
+        return ['/static/js/tracker.js']
 
 
