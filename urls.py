@@ -105,6 +105,7 @@ class AdminMessagesHandler(BaseHandler):
     def get(self):
         self.render('admin/admin_messages.html')
 
+
 class JsonTrackerHandler(BaseHandler):
     def get(self):
         tdata = self.request.arguments
@@ -118,9 +119,9 @@ class JsonTrackerHandler(BaseHandler):
 
 class TrackerPngHandler(BaseHandler):
     def get(self):
-        tdata = self.request.cookies
+        tdata = self.request
         # jdata = {'innaWidth': self.get_argument('innerW')},
-        pprint(dir(tdata))
+        print(tdata)
         
         
 handlers = [
