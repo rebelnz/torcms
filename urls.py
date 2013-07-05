@@ -113,17 +113,19 @@ class JsonTrackerHandler(BaseHandler):
         self.write(simplejson.dumps(tdata))
 
     def post(self):
-        tdata = self.request.arguments
-        # jdata = {'innaWidth': self.get_argument('innerW')},
-        self.write(simplejson.dumps(tdata))
+        # jdata = self.request.arguments
+        jdata = {'innaWidth': self.get_argument('innerW')},
+        self.write(simplejson.dumps(jdata))
 
 class TrackerPngHandler(BaseHandler):
     def get(self):
         tdata = self.request
         # jdata = {'innaWidth': self.get_argument('innerW')},
+        # print(dir(tdata))
+        # print(tdata.uri)
         print(tdata)
-        
-        
+
+
 handlers = [
     (r"/", IndexHandler),
     (r"/login", LoginHandler),
