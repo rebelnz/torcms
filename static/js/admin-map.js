@@ -23,22 +23,23 @@ function getMapData() {
 
 function buildMap(mapdata) {
     
-    var dataLat;
-    var dataLong;
-    var zoomLevel;
+    var dataLat,
+		dataLong,
+		zoomLevel;
 
-    if(typeof(mapdata[0])!=='undefined') {
-        dataLat = Number(mapdata[0]['latitude']) || 37.5408;
-        dataLong = Number(mapdata[1]['longitude']) || 126.971269;
-        zoomLevel = 13;
-    } else { // default and zoomed out 
+	if ($.isEmptyObject(mapdata)) { //default vals and zoom waay out
         dataLat = 37.5408;
         dataLong = 126.971269;
         zoomLevel = 1;
-    }
+		console.log('empty');
+		} else {
+			dataLat = Number(mapdata[0]['latitude']);
+			dataLong = Number(mapdata[1]['longitude']);
+			zoomLevel = 13;			
+		}
 
-    var map = L.map('admin-settings-map').setView([dataLat,dataLong],zoomLevel); 
-    var marker = L.marker([dataLat,dataLong], {draggable:true}).addTo(map);
+    var map = L.map('admin-settings-map').setView([dataLat,dataLong],zoomLevel),
+		marker = L.marker([dataLat,dataLong], {draggable:true}).addTo(map);
     
     L.tileLayer('http://{s}.tile.cloudmade.com/' 
                 + MapConfig['apikeys']['cloudmade'] 
