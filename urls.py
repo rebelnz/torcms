@@ -1,4 +1,6 @@
 import tornado.web
+import tornado.gen
+import tornado.httpclient
 import db
 import forms
 import simplejson
@@ -118,13 +120,17 @@ class JsonTrackerHandler(BaseHandler):
         self.write(simplejson.dumps(jdata))
 
 class TrackerPngHandler(BaseHandler):
+    @tornado.gen.coroutine
     def get(self):
-        tdata = self.request
-        # jdata = {'innaWidth': self.get_argument('innerW')},
-        # print(dir(tdata))
-        # print(tdata.uri)
-        print(tdata)
-
+        analytics = {}
+        http_client = tornado.httpclient.AsyncHTTPClient()
+        response = yield http_client.fetch("http://freegeoip.net/json/203.132.164.25")
+        analytics['ipdata'] = simplejson.loads(response.body)
+        analytics['reqtime'] = simplejson.dumps(self.request.request_time())
+        analytics['headers'] = simplejson.dumps(self.request.headers)
+        db.add_analytics(analytics)
+        print(analytics)
+        pass
 
 handlers = [
     (r"/", IndexHandler),

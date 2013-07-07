@@ -62,3 +62,9 @@ def add_social_data(data):
 
 def get_social_settings():
     return database.social_settings.find_one()
+
+
+def add_analytics(data):
+    data['updated'] = datetime.datetime.now()
+    database.analytics.insert(data)
+    return 
