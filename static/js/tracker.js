@@ -1,12 +1,13 @@
-var ATRACKER = ATRACKER || {};
+var TORCMS = TORCMS || {};
 
-ATRACKER.namespace = function(ns_string) {
+// namespace function
+TORCMS.namespace = function(ns_string) {
 	var parts = ns_string.split('.'),
-		parent = ATRACKER,
+		parent = TORCMS,
 		i;
 	
-	// strip 'ATRACKER'
-	if (parts[0] === 'ATRACKER') {
+	// strip 'TORCMS'
+	if (parts[0] === 'TORCMS') {
 		parts = parts.slice(1);
 	}
 	
@@ -21,13 +22,35 @@ ATRACKER.namespace = function(ns_string) {
 };
 
 
-ATRACKER.namespace("fireGetReq");
+TORCMS.namespace("TORCMS.postreq");
+TORCMS.namespace("TORCMS.getcookie");
 
-
-function getCookie(name) {
+TORCMS.getcookie = function (name) {
     var r = document.cookie.match("\\b" + name + "=([^;]*)\\b");
     return r ? r[1] : undefined;
-}
+};
+
+
+
+TORCMS.postreq = (function() {
+	var t = new Date();			
+	var xsrf = TORCMS.getcookie("_xsrf");
+
+	return $.post("/json/tracker",{ innerW: window.innerWidth, 
+									date:t,
+									_xsrf: xsrf
+								  })
+		.done(function(data) {
+			// console.log(data);
+		});	
+}());
+
+
+(function initTracker() {	
+	req = TORCMS.postreq;
+	console.log(req);	
+})();
+
 
 // http://www.tornadoweb.org/en/stable/overview.html
 // jQuery.postJSON = function(url, args, callback) {
@@ -38,25 +61,5 @@ function getCookie(name) {
 //     }});
 // };
 
-(function () {
-	var t = new Date();			
-	var xsrf = getCookie("_xsrf");
-	ATRACKER.fireGetReq = {
-		getReq: function() {
-			return $.post("/json/tracker",{ innerW: window.innerWidth, 
-											date:t,
-											_xsrf: xsrf
-											// _xsrf: '62a952754043441f9ddb30ed6f7b1cde'
-										  } )
-				.done(function(data) {
-					console.log(data);
-				});		    			
-		}
-	};
-}());
 
 
-
-(function initTracker() {	
-	ATRACKER.fireGetReq.getReq();
-})();

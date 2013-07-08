@@ -122,14 +122,14 @@ class JsonTrackerHandler(BaseHandler):
 class TrackerPngHandler(BaseHandler):
     @tornado.gen.coroutine
     def get(self):
-        analytics = {}
-        http_client = tornado.httpclient.AsyncHTTPClient()
-        response = yield http_client.fetch("http://freegeoip.net/json/203.132.164.25")
-        analytics['ipdata'] = simplejson.loads(response.body)
-        analytics['reqtime'] = simplejson.dumps(self.request.request_time())
-        analytics['headers'] = simplejson.dumps(self.request.headers)
-        db.add_analytics(analytics)
-        print(analytics)
+        # analytics = {}
+        # http_client = tornado.httpclient.AsyncHTTPClient()
+        # response = yield http_client.fetch("http://freegeoip.net/json/203.132.164.25")
+        # analytics['ipdata'] = simplejson.loads(response.body)
+        # analytics['reqtime'] = simplejson.dumps(self.request.request_time())
+        # analytics['headers'] = simplejson.dumps(self.request.headers)
+        # db.add_analytics(analytics)
+        # print(analytics)
         pass
 
 handlers = [
