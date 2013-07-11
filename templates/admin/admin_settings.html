@@ -5,38 +5,37 @@
 
 {% module AdminSettingsNavModule() %}
 
-<div id="admin-settings-content" class="row-fluid">
+<div id="admin-settings-content" class="row">
     
   {% if sMod == "site" %}  
-  <div class="span2">
+  <div class="span3">
     {% module AdminSettingsSiteFormModule() %}
   </div>
   <div class="span6">
     {% module AdminSettingsSiteModule() %}
   </div>
-  <div class="span2"></div>
+  <div class="span1"></div>
   {% end %}  
 
 
   {% if sMod == "map" %}  
-  <div class="span2">
+  <div class="span3">
     {% module AdminSettingsAddressFormModule() %}
   </div>
-  <div class="span6">
+  <div class="span7">
     {% module AdminSettingsMapModule() %}
   </div>
-  <div class="span2"></div>
   {% end %}
 
 
   {% if sMod == "social" %}  
-  <div class="span2">
+  <div class="span3">
     {% module AdminSettingsSocialFormModule() %}
   </div>
   <div class="span6">
     {% module AdminSettingsSocialModule() %}
   </div>
-  <div class="span2"></div>
+  <div class="span1"></div>
   {% end %}
 
 

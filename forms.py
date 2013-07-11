@@ -42,4 +42,13 @@ class AdminSettingsSocialForm(BaseForm):
   kakao    = TextField(u'Kakao')
   twitter = TextField(u'Twitter')
   linkedin = TextField(u'Linkedin')
+
+
+class AdminPagesForm(BaseForm):
+  title = TextField(u'Title*',[Required()])
+  subtitle  = TextField(u'Heading')
+  content  = TextAreaField()
+  # kakao    = TextField(u'Kakao')
+  # twitter = TextField(u'Twitter')
+  # linkedin = TextField(u'Linkedin')
   

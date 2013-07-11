@@ -97,6 +97,11 @@ class AdminJsonGetMapHandler(BaseHandler):
         self.write(simplejson.dumps(mapdata))
 
 
+class AdminPagesHandler(BaseHandler):
+    def get(self, sModule=None):
+        self.render('admin/admin_pages.html',sMod=sModule)
+
+
 class AdminUsersHandler(BaseHandler):
     def get(self,uModule=None):
         print uModule
@@ -139,6 +144,7 @@ handlers = [
     (r"/admin/settings/([^/]+)",AdminSettingsHandler),
     (r"/admin/users/([^/]+)", AdminUsersHandler),
     (r"/admin/messages", AdminMessagesHandler),
+    (r"/admin/pages/([^/]+)", AdminPagesHandler),
     (r"/admin/json/getmap", AdminJsonGetMapHandler),
     (r"/json/tracker", JsonTrackerHandler),
     (r"/tracker.png", TrackerPngHandler),

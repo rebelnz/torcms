@@ -1,0 +1,36 @@
+<form action="" method="post" enctype="multipart/form-data" class="form">
+{% raw xsrf_form_html() %}
+
+<div class="control-group">
+  <label class="control-label" for="facebook">Title</label>
+  <div class="controls">
+    {{ form.title() }}
+    {% if form.title.errors %}
+    {% for error in form.title.errors %}
+    <span class="errors">{{ error }}</span>
+    {% end %}
+    {% end %}
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="subtitle">Subtitle</label>
+  <div class="controls">
+    {{ form.subtitle() }}
+    {% if form.subtitle.errors %}
+    {% for error in form.subtitle.errors %}
+    <span class="errors">{{ error }}</span>
+    {% end %}
+    {% end %}
+  </div>
+</div>
+
+<div class="control-group">
+  <label class="control-label" for="content">Content</label>
+  <div class="controls">    
+    {{ form.content() }}
+  </div>
+</div>
+
+<button type="submit" class="btn btn-primary">Save</button>
+</form>

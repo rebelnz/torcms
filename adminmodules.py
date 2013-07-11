@@ -103,7 +103,6 @@ class AdminSettingsAddressFormModule(tornado.web.UIModule):
                                   form=form,
                                   )
 
-
     # social module
 class AdminSettingsSocialModule(tornado.web.UIModule):
     def render(self):
@@ -157,5 +156,11 @@ class AdminSettingsAnalyticsModule(tornado.web.UIModule):
 
     def javascript_files(self):
         return ['/static/js/tracker.js']
+
+
+class AdminPagesFormModule(tornado.web.UIModule):
+    def render(self):
+        form = forms.AdminPagesForm() # from forms file
+        return self.render_string('admin/forms/admin_pages_add_form.html', form=form)
 
 

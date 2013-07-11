@@ -1,0 +1,25 @@
+{% extends "admin_base.html" %}
+{% block body %}
+
+<h4>Admin Pages</h4>
+
+
+<div id="admin-pages-content" class="row">
+    
+  {% if sMod == "add" %}  
+  <div class="span3">
+    {% module AdminPagesFormModule() %}
+  </div>
+  {% end %}  
+
+
+  {% if sMod == "all" %}  
+  <div class="span3">
+    module AdminPagesAllForm()
+  </div>
+  {% end %}
+
+</div>
+
+{% end %}
+
