@@ -69,7 +69,7 @@ class AdminSettingsHandler(BaseHandler):
             form = forms.AdminSettingsSiteForm(self)
             if form.validate():
                 db.add_site_data(form.data)
-            else:
+            else: #TODO form error handling
                 pprint(form.errors)
                 print("invalid")
 
@@ -77,7 +77,7 @@ class AdminSettingsHandler(BaseHandler):
             form = forms.AdminSettingsSocialForm(self)
             if form.validate():
                 db.add_social_data(form.data)
-            else:
+            else:#TODO form error handling
                 pprint(form.errors)
                 print("invalid")
 
@@ -85,12 +85,13 @@ class AdminSettingsHandler(BaseHandler):
             form = forms.AdminSettingsAddressForm(self)
             if form.validate():
                 db.add_address_data(form.data)
-            else:
+            else:#TODO form error handling
                 pprint(form.errors)
                 print("invalid")
 
         self.render('admin/admin_settings.html',sMod=sModule)
 
+        
 class AdminJsonGetMapHandler(BaseHandler):
     def get(self):
         mapdata = db.get_map_data()
@@ -124,6 +125,7 @@ class JsonTrackerHandler(BaseHandler):
         jdata = {'innaWidth': self.get_argument('innerW')},
         self.write(simplejson.dumps(jdata))
 
+        
 class TrackerPngHandler(BaseHandler):
     @tornado.gen.coroutine
     def get(self):
