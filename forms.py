@@ -45,10 +45,12 @@ class AdminSettingsSocialForm(BaseForm):
 
 
 class AdminPagesForm(BaseForm):
+  slug    = TextField(u'Slug')
   title = TextField(u'Title*',[Required()])
   subtitle  = TextField(u'Heading')
+  summary  = TextAreaField()
   content  = TextAreaField()
-  # kakao    = TextField(u'Kakao')
+  
   # twitter = TextField(u'Twitter')
   # linkedin = TextField(u'Linkedin')
   

@@ -2,9 +2,19 @@
 {% raw xsrf_form_html() %}
 
 <div class="control-group">
-  <label class="control-label" for="facebook">Title</label>
   <div class="controls">
-    {{ form.title() }}
+    {{ form.slug(placeholder="Slug",required="true") }}
+    {% if form.slug.errors %}
+    {% for error in form.slug.errors %}
+    <span class="errors">{{ error }}</span>
+    {% end %}
+    {% end %}
+  </div>
+</div>
+
+<div class="control-group">
+  <div class="controls">
+    {{ form.title(placeholder="Title",required="true") }}
     {% if form.title.errors %}
     {% for error in form.title.errors %}
     <span class="errors">{{ error }}</span>
@@ -14,9 +24,8 @@
 </div>
 
 <div class="control-group">
-  <label class="control-label" for="subtitle">Subtitle</label>
   <div class="controls">
-    {{ form.subtitle() }}
+    {{ form.subtitle(placeholder="Sub-title") }}
     {% if form.subtitle.errors %}
     {% for error in form.subtitle.errors %}
     <span class="errors">{{ error }}</span>
@@ -26,9 +35,14 @@
 </div>
 
 <div class="control-group">
-  <label class="control-label" for="content">Content</label>
   <div class="controls">    
-    {{ form.content() }}
+    {{ form.summary(rows=12,cols=400,placeholder="Summary") }}
+  </div>
+</div>
+
+<div class="control-group">
+  <div class="controls">    
+    {{ form.content(placeholder="Content") }}
   </div>
 </div>
 
